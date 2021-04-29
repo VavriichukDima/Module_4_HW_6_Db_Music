@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31205.134
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Module_4_HW_6_Db_Music", "Module_4_HW_6_Db_Music\Module_4_HW_6_Db_Music.csproj", "{BA1539EB-33C2-4A59-BF51-96093A26E243}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SolutionItems", "SolutionItems", "{CEA3DD7B-BDE5-40D8-A0D9-936FB866CF85}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\..\Desktop\New folder\settings.ruleset = ..\..\..\Desktop\New folder\settings.ruleset
+		..\..\..\Desktop\New folder\stylecop.json = ..\..\..\Desktop\New folder\stylecop.json
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BA1539EB-33C2-4A59-BF51-96093A26E243}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA1539EB-33C2-4A59-BF51-96093A26E243}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA1539EB-33C2-4A59-BF51-96093A26E243}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA1539EB-33C2-4A59-BF51-96093A26E243}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {F76BD01E-6929-498B-AC5E-D7860E4D2B72}
+	EndGlobalSection
+EndGlobal
