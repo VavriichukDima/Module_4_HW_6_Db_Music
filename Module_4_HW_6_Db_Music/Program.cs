@@ -6,7 +6,6 @@ namespace Module_4_HW_6_Db_Music
     {
         public static void Main(string[] args)
         {
-
         }
     }
 }

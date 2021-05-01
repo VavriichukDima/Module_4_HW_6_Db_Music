@@ -1,0 +1,35 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Metadata.Builders;
+using Module_4_HW_6_Db_Music.Entities;
+
+namespace Module_4_HW_6_Db_Music.EntitiesConfiguration
+{
+    public class SongConfihuration : IEntityTypeConfiguration<Song>
+    {
+        public void Configure(EntityTypeBuilder<Song> builder)
+        {
+            builder.ToTable("Song").HasKey(p => p.SongId);
+            builder.Property(p => p.SongTitle).HasColumnName("SongTitle");
+            builder.Property(p => p.Duration).HasColumnName("Duration");
+            builder.Property(p => p.ReleasedDate).HasColumnName("ReleasedDate");
+
+            builder.HasMany(d => d.Artists)
+                .WithMany(p => p.Songs)
+                .UsingEntity<Dictionary<string, object>>(
+                    "Supply",
+                    j => j
+                        .HasOne<Artist>()
+                        .WithMany()
+                        .HasForeignKey("ArtistId"),
+                    j => j
+                        .HasOne<Song>()
+                        .WithMany()
+                        .HasForeignKey("SongId"));
+        }
+    }
+}
