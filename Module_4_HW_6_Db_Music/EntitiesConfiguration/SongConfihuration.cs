@@ -15,7 +15,7 @@ namespace Module_4_HW_6_Db_Music.EntitiesConfiguration
         {
             builder.ToTable("Song").HasKey(p => p.SongId);
             builder.Property(p => p.SongTitle).HasColumnName("SongTitle");
-            builder.Property(p => p.Duration).HasColumnName("Duration");
+            builder.Property(p => p.Duration).HasColumnName("Duration").HasColumnType("Time");
             builder.Property(p => p.ReleasedDate).HasColumnName("ReleasedDate");
 
             builder.HasMany(d => d.Artists)
