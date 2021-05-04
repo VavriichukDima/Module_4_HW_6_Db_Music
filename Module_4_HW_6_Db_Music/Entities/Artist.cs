@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Module_4_HW_6_Db_Music.Entities
 {
@@ -15,6 +12,6 @@ namespace Module_4_HW_6_Db_Music.Entities
         public string Email { get; set; }
         public string InstagramURL { get; set; }
 
-        public List<Song> Songs { get; set; } = new List<Song>();
+        public virtual List<Song> Songs { get; set; } = new List<Song>();
     }
 }

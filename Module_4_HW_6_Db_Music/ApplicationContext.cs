@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Module_4_HW_6_Db_Music.Entities;
 using Module_4_HW_6_Db_Music.EntitiesConfiguration;
 using Microsoft.EntityFrameworkCore;
@@ -24,6 +20,7 @@ namespace Module_4_HW_6_Db_Music
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             optionsBuilder.EnableSensitiveDataLogging().LogTo(Console.WriteLine, LogLevel.Information);
+            optionsBuilder.UseLazyLoadingProxies();
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)

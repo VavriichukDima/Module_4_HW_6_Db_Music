@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Module_4_HW_6_Db_Music.Entities
 {
@@ -14,7 +11,7 @@ namespace Module_4_HW_6_Db_Music.Entities
         public DateTime ReleasedDate { get; set; }
         public int GenreId { get; set; }
 
-        public Genre Genre { get; set; }
-        public List<Artist> Artists { get; set; } = new List<Artist>();
+        public virtual Genre Genre { get; set; }
+        public virtual List<Artist> Artists { get; set; } = new List<Artist>();
     }
 }

@@ -3,9 +3,8 @@ using System.IO;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
-using Module_4_HW_6_Db_Music;
 
-namespace EFCoreDemo
+namespace Module_4_HW_6_Db_Music
 {
     public class SampleContextFactory : IDesignTimeDbContextFactory<ApplicationContext>
     {
