@@ -16,12 +16,18 @@ namespace Module_4_HW_6_Db_Music
 
         public async Task FirstRequestAsync()
         {
-            var allInfo = await _context.Songs
-                .Select(z => new { SongName = z.SongTitle, Artist = z.Artists.Select(x => x.Name), Genre = z.Genre.Title })
-                .ToListAsync();
+            var allInfo2 = await (from genre in _context.Genres
+                                 join song in _context.Songs on genre.GenreId equals song.GenreId
+                                 join artist in _context.Artists on song.SongId equals artist.ArtistId
+                                 select new
+                                 {
+                                     SongName = song.SongTitle,
+                                     Artist = artist.Name,
+                                     Genre = genre.Title
+                                 }).ToListAsync();
 
             Console.WriteLine("----FirstRequest----");
-            foreach (var temp in allInfo)
+            foreach (var temp in allInfo2)
             {
                 Console.WriteLine($"SongName: {temp.SongName}, Artist name: {temp.Artist}, Genre: {temp.Genre}");
             }
