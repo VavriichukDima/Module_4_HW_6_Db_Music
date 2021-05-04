@@ -18,7 +18,7 @@ namespace Module_4_HW_6_Db_Music.EntitiesConfiguration
 
             builder.HasMany(z => z.Songs)
                 .WithOne(x => x.Genre)
-                .HasForeignKey(z => z.SongId)
+                .HasForeignKey(z => z.GenreId)
                 .OnDelete(DeleteBehavior.Restrict);
         }
     }

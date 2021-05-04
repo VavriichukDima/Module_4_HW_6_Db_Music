@@ -12,6 +12,7 @@ namespace Module_4_HW_6_Db_Music.Entities
         public string SongTitle { get; set; }
         public TimeSpan Duration { get; set; }
         public DateTime ReleasedDate { get; set; }
+        public int GenreId { get; set; }
 
         public Genre Genre { get; set; }
         public List<Artist> Artists { get; set; } = new List<Artist>();

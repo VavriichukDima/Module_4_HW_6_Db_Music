@@ -10,7 +10,7 @@ using Module_4_HW_6_Db_Music;
 namespace Module_4_HW_6_Db_Music.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20210501193300_InitialCreate")]
+    [Migration("20210504130604_InitialCreate")]
     partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -29,7 +29,7 @@ namespace Module_4_HW_6_Db_Music.Migrations
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<DateTime>("DateOfBirth")
-                        .HasColumnType("datetime2")
+                        .HasColumnType("date2")
                         .HasColumnName("DateOfBirth");
 
                     b.Property<string>("Email")
@@ -72,11 +72,17 @@ namespace Module_4_HW_6_Db_Music.Migrations
             modelBuilder.Entity("Module_4_HW_6_Db_Music.Entities.Song", b =>
                 {
                     b.Property<int>("SongId")
-                        .HasColumnType("int");
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
                     b.Property<TimeSpan>("Duration")
-                        .HasColumnType("time")
+                        .HasColumnType("Time")
                         .HasColumnName("Duration");
+
+                    b.Property<int>("GenreId")
+                        .HasColumnType("int")
+                        .HasColumnName("SongGenre");
 
                     b.Property<DateTime>("ReleasedDate")
                         .HasColumnType("datetime2")
@@ -87,6 +93,8 @@ namespace Module_4_HW_6_Db_Music.Migrations
                         .HasColumnName("SongTitle");
 
                     b.HasKey("SongId");
+
+                    b.HasIndex("GenreId");
 
                     b.ToTable("Song");
                 });
@@ -110,7 +118,7 @@ namespace Module_4_HW_6_Db_Music.Migrations
                 {
                     b.HasOne("Module_4_HW_6_Db_Music.Entities.Genre", "Genre")
                         .WithMany("Songs")
-                        .HasForeignKey("SongId")
+                        .HasForeignKey("GenreId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 

@@ -17,6 +17,7 @@ namespace Module_4_HW_6_Db_Music.EntitiesConfiguration
             builder.Property(p => p.SongTitle).HasColumnName("SongTitle");
             builder.Property(p => p.Duration).HasColumnName("Duration").HasColumnType("Time");
             builder.Property(p => p.ReleasedDate).HasColumnName("ReleasedDate");
+            builder.Property(p => p.GenreId).HasColumnName("SongGenre");
 
             builder.HasMany(d => d.Artists)
                 .WithMany(p => p.Songs)

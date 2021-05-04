@@ -15,7 +15,7 @@ namespace Module_4_HW_6_Db_Music.EntitiesConfiguration
         {
             builder.ToTable("Artist").HasKey(p => p.ArtistId);
             builder.Property(p => p.Name).HasColumnName("Name");
-            builder.Property(p => p.DateOfBirth).HasColumnName("DateOfBirth").HasColumnType("date2");
+            builder.Property(p => p.DateOfBirth).HasColumnName("DateOfBirth").HasColumnType("Date");
             builder.Property(p => p.Phone).HasColumnName("Phone").IsRequired(false);
             builder.Property(p => p.Email).HasColumnName("Email").IsRequired(false);
             builder.Property(p => p.InstagramURL).HasColumnName("InstagramURL").IsRequired(false);

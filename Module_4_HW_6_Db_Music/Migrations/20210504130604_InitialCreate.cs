@@ -14,7 +14,7 @@ namespace Module_4_HW_6_Db_Music.Migrations
                     ArtistId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    DateOfBirth = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    DateOfBirth = table.Column<DateTime>(type: "date", nullable: false),
                     Phone = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     InstagramURL = table.Column<string>(type: "nvarchar(max)", nullable: true)
@@ -44,15 +44,16 @@ namespace Module_4_HW_6_Db_Music.Migrations
                     SongId = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     SongTitle = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Duration = table.Column<TimeSpan>(type: "time", nullable: false),
-                    ReleasedDate = table.Column<DateTime>(type: "datetime2", nullable: false)
+                    Duration = table.Column<TimeSpan>(type: "Time", nullable: false),
+                    ReleasedDate = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    SongGenre = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Song", x => x.SongId);
                     table.ForeignKey(
-                        name: "FK_Song_Genre_SongId",
-                        column: x => x.SongId,
+                        name: "FK_Song_Genre_SongGenre",
+                        column: x => x.SongGenre,
                         principalTable: "Genre",
                         principalColumn: "GenreId",
                         onDelete: ReferentialAction.Restrict);
@@ -83,6 +84,11 @@ namespace Module_4_HW_6_Db_Music.Migrations
                 });
 
             migrationBuilder.CreateIndex(
+                name: "IX_Song_SongGenre",
+                table: "Song",
+                column: "SongGenre");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Supply_SongId",
                 table: "Supply",
                 column: "SongId");
@@ -99,11 +105,17 @@ namespace Module_4_HW_6_Db_Music.Migrations
                                    INSERT INTO Genre(Title) VALUES ('Rock')
                                    INSERT INTO Genre(Title) VALUES ('Pop')");
 
-            migrationBuilder.Sql(@"INSERT INTO Song(SongTitle, Duration, ReleasedDate) VALUES('Alone', CAST('00:03:19' as TIME), '2016-01-01')
-                                   INSERT INTO Song(SongTitle, Duration, ReleasedDate) VALUES('Forester', CAST('00:03:10' as TIME), '1996-01-01')
-                                   INSERT INTO Song(SongTitle, Duration, ReleasedDate) VALUES('Monument', CAST('00:06:48' as TIME), '2014-01-01')
-                                   INSERT INTO Song(SongTitle, Duration, ReleasedDate) VALUES('Numb', CAST('00:03:06' as TIME), '2003-01-01')
-                                   INSERT INTO Song(SongTitle, Duration, ReleasedDate) VALUES('Buffalo Soldier', CAST('00:04:18' as TIME), '1983-01-01')");
+            migrationBuilder.Sql(@"INSERT INTO Song(SongTitle, Duration, ReleasedDate, SongGenre) VALUES('Alone', CAST('00:03:19' as TIME), CAST('2016-01-01' as DATE), (SELECT GenreId FROM Genre WHERE Title = 'R&B'))
+                                   INSERT INTO Song(SongTitle, Duration, ReleasedDate, SongGenre) VALUES('Forester', CAST('00:03:10' as TIME), CAST('1996-01-01' as DATE), (SELECT GenreId FROM Genre WHERE Title = 'Rock'))
+                                   INSERT INTO Song(SongTitle, Duration, ReleasedDate, SongGenre) VALUES('Monument', CAST('00:06:48' as TIME), CAST('2014-01-01' as DATE), (SELECT GenreId FROM Genre WHERE Title = 'Electronic'))
+                                   INSERT INTO Song(SongTitle, Duration, ReleasedDate, SongGenre) VALUES('Numb', CAST('00:03:06' as TIME), CAST('2003-01-01' as DATE), (SELECT GenreId FROM Genre WHERE Title = 'Rock'))
+                                   INSERT INTO Song(SongTitle, Duration, ReleasedDate, SongGenre) VALUES('Buffalo Soldier', CAST('00:04:18' as TIME), CAST('1983-01-01' as DATE), (SELECT GenreId FROM Genre WHERE Title = 'Reggae'))");
+
+            migrationBuilder.Sql(@"INSERT INTO Supply(ArtistId, SongId) VALUES((SELECT ArtistId FROM Artist WHERE Name = 'Christopher Comstock'), (SELECT SongId FROM Song WHERE SongTitle = 'Alone'))
+                                   INSERT INTO Supply(ArtistId, SongId) VALUES((SELECT ArtistId FROM Artist WHERE Name = 'Mikhail Gorshenev'), (SELECT SongId FROM Song WHERE SongTitle = 'Forester'))
+                                   INSERT INTO Supply(ArtistId, SongId) VALUES((SELECT ArtistId FROM Artist WHERE Name = 'Röyksopp'), (SELECT SongId FROM Song WHERE SongTitle = 'Monument'))
+                                   INSERT INTO Supply(ArtistId, SongId) VALUES((SELECT ArtistId FROM Artist WHERE Name = 'Chester Bennington'), (SELECT SongId FROM Song WHERE SongTitle = 'Numb'))
+                                   INSERT INTO Supply(ArtistId, SongId) VALUES((SELECT ArtistId FROM Artist WHERE Name = 'Bob Marley'), (SELECT SongId FROM Song WHERE SongTitle = 'Buffalo Soldier'))");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -111,6 +123,7 @@ namespace Module_4_HW_6_Db_Music.Migrations
             migrationBuilder.Sql("DELETE FROM Artist");
             migrationBuilder.Sql("DELETE FROM Genre");
             migrationBuilder.Sql("DELETE FROM Song");
+            migrationBuilder.Sql("DELETE FROM Supply");
 
             migrationBuilder.DropTable(
                 name: "Supply");
